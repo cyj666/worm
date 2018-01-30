@@ -46,10 +46,8 @@ public class JsoupUtil {
 		connection.userAgent("Mozilla/5.0 (Windows NT 6.1; WOW64; rv:29.0) Gecko/20100101 Firefox/29.0")
 		.timeout(3000);
 		Document doc = connection.get();	
-		getResult(doc);
+		//getResult(doc);  //豆瓣专用
         Elements elements = doc.select("a");
-        System.out.println("BaseUri为："+doc.baseUri());
-        System.out.println("adcURl为："+doc.absUrl(url));
         for(Element element : elements){
             String aurl = element.attr("href") ;
             if (!Pattern.matches("^(http|https)://+.*", aurl)&&!Pattern.matches(".*(www.|.com|.cn).*", aurl)) {           	
@@ -63,12 +61,12 @@ public class JsoupUtil {
             /**
              * 在此修改URL过滤策略，只提取想要的目标网址的格式
              */
-            if (Pattern.matches(".*start=[0-9]{0,2}$", aurl)) {
+            /*if (Pattern.matches(".*start=[0-9]{0,2}$", aurl)) {
             	if(!queue.contains(aurl)){
                     queue.addQueue(aurl);
                    toUnVisitedRedis(jedis,aurl);
                 }
-			}
+			}*/
             
             
         }

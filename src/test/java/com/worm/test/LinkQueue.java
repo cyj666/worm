@@ -13,6 +13,7 @@ public class LinkQueue {
 	
 	static {
 		Jedis jedis = JedisTest.getResource();
+		//模拟最初要输的网址，当后面有缓存时就不用。
 		if (jedis.scard("visitedUrl")==0) {
 			unVisitedUrl.addQueue("https://movie.douban.com/review/best/?start=0");
 		}else {		
