@@ -58,10 +58,18 @@ public class JsoupUtil {
 				}            	
 				aurl=url+aurl;				
 			}
+            
+            
+            
+            if(!queue.contains(aurl)){
+                queue.addQueue(aurl);
+               toUnVisitedRedis(jedis,aurl);
+            }
+            
             /**
              * 在此修改URL过滤策略，只提取想要的目标网址的格式
              */
-            /*if (Pattern.matches(".*start=[0-9]{0,2}$", aurl)) {
+           /* if (Pattern.matches("https://movie.douban.com/review/best/?start=[0-9]{0,2}$", aurl)) {
             	if(!queue.contains(aurl)){
                     queue.addQueue(aurl);
                    toUnVisitedRedis(jedis,aurl);
@@ -80,7 +88,7 @@ public class JsoupUtil {
     
     public static void main(String[] args) {
 		//System.out.println("http://www.acfun.cn/".lastIndexOf("/"));
-		System.out.println(Pattern.matches(".*start=[0-9]{0,2}$", "https://movie.douban.com/review/best/?start=80"));
+		System.out.println(Pattern.matches("(http|https)://", "https://movie.douban.com/review/best/?start=80"));
 	}
     
     public static void getResult(Document document) {
